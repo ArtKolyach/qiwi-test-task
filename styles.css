@@ -1,8 +1,13 @@
-#content {
+.content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 #description {
     display: none;
     border: black solid 1px;
+}
+
+#selector {
+    margin-bottom: 10px;
 }
