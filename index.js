@@ -7,13 +7,12 @@ const getValues = async () => {
     return data;
 };
 
-
 const displayOption = async () => {
     const options = await getValues();
     const currencies = options.Valute
     const dates = {
-        currentDate: options.Date,
-        previousDate: options.PreviousDate,
+        currentDate: localizeDate(options.Date),
+        previousDate: localizeDate(options.PreviousDate),
     }
     console.log(`Даты: ` , dates)
     console.log(`Все опции: ` ,options, currencies)
@@ -56,6 +55,27 @@ const addDescription = (valute, dates) => {
     previousValueDescription.textContent = `${dates.previousDate} - ${valute.Previous}`
 
 
+}
+
+const formatDate = (date) => {
+    const resultDate = addZero(date.getDate())
+    const resultMonth = addZero(date.getMonth() + 1)
+    const resultYear = date.getFullYear()
+    const resultHours = addZero(date.getHours())
+    const resultMinutes = addZero(date.getMinutes())
+    const resultSeconds = addZero(date.getSeconds())
+    return `${resultDate}/${resultMonth}/${resultYear}, ${resultHours}:${resultMinutes}:${resultSeconds}`
+}
+
+const addZero = (number) => {
+    if (number < 10) return '0' + number
+    else return number
+}
+
+const localizeDate = (dateString) => {
+    const date = new Date(dateString)
+    console.log(date.toLocaleString())
+    return (date.toLocaleString().replaceAll('.','/'))
 }
 
 displayOption();
