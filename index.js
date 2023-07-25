@@ -14,13 +14,10 @@ const displayOption = async () => {
         currentDate: localizeDate(options.Date),
         previousDate: localizeDate(options.PreviousDate),
     }
-    console.log(`Даты: ` , dates)
-    console.log(`Все опции: ` ,options, currencies)
     for (let currency in currencies) {
         const valute = {
             ...currencies[currency]
         }
-        console.log("Валюта: " , valute)
 
         const newOption = document.createElement("option");
 
@@ -31,13 +28,11 @@ const displayOption = async () => {
 
     selectorElement.addEventListener('change', (event => {
         const selectedValue = event.target.value
-        console.log(selectedValue)
         addDescription(currencies[selectedValue], dates)
     }))
 };
 
 const addDescription = (valute, dates) => {
-    console.log(valute)
     const descriptionElement = document.getElementById('description');
 
     if (!valute) {
@@ -57,24 +52,8 @@ const addDescription = (valute, dates) => {
 
 }
 
-const formatDate = (date) => {
-    const resultDate = addZero(date.getDate())
-    const resultMonth = addZero(date.getMonth() + 1)
-    const resultYear = date.getFullYear()
-    const resultHours = addZero(date.getHours())
-    const resultMinutes = addZero(date.getMinutes())
-    const resultSeconds = addZero(date.getSeconds())
-    return `${resultDate}/${resultMonth}/${resultYear}, ${resultHours}:${resultMinutes}:${resultSeconds}`
-}
-
-const addZero = (number) => {
-    if (number < 10) return '0' + number
-    else return number
-}
-
 const localizeDate = (dateString) => {
     const date = new Date(dateString)
-    console.log(date.toLocaleString())
     return (date.toLocaleString().replaceAll('.','/'))
 }
 
